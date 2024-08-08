@@ -1,7 +1,6 @@
 import axios from "axios";
 import { DataType } from "../types";
-
-const token = "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";
+import mytoken from "../token.ts"
 
 export async function getUsers(
   searchParams: string,
@@ -22,6 +21,8 @@ export async function getUsers(
   if (sort === "ascending") {
     sortResult = "&sort=repositories&order=asc";
   }
+
+  const token = mytoken() // В dev версии через Vite не работает process.env - сюда подставляем вместо mytoken - process.env.REACT_APP_TOKEN - токен github
 
   try {
     const config = {
