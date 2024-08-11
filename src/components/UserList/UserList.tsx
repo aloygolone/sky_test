@@ -22,7 +22,7 @@ export default function UserList({ users }: UserListType) {
 
   const [isOpenedUserInfo, setIsOpenedUserInfo] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [repoPage, setRepoPage] = useState<number>(1);
+  const [repoPage, setRepoPage] = useState<number>(1); // Начальное значение страницы отображаемых репозиториев всегда 1
 
   function handleClickOnUser(
     userName: string,
@@ -39,13 +39,13 @@ export default function UserList({ users }: UserListType) {
       user_url: userUrl,
       userPhotoUrl: userPhoto || "",
     }));
-    getUserInfo(userName, "topics", 1).then((topicsData) => {
+    getUserInfo(userName, "topics").then((topicsData) => {
       setUserInfo((prevData) => ({
         ...prevData,
         topicsCount: topicsData.total_count,
       }));
     });
-    getUserInfo(userName, "commits", 1).then((commitsData) => {
+    getUserInfo(userName, "commits").then((commitsData) => {
       setUserInfo((prevData) => ({
         ...prevData,
         commitsCount: commitsData.total_count,

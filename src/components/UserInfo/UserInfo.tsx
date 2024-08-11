@@ -13,10 +13,10 @@ type UserInfo = {
 export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
   const [isOpenedRepositories, setIsOpenedRepositories] =
     useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<number>(1); // По аналогии с инпутом из MainPage - кол-во страниц не может быть меньше единицы, в случае некорректного значения возвращаемся к 1
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const maxPage = pagesCalculator(10, userInfo.repositories.total_count);
+  const maxPage = pagesCalculator(10, userInfo.repositories.total_count); // В данном случае 10 - это количество отображаемых элементов на страницы - для коммитов, тем и репозиториев - оно всегда неизменно для красоты отображения в элементе
 
   useEffect(() => {
     if (inputValue < 1) {

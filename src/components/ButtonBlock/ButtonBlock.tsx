@@ -17,7 +17,7 @@ export default function ButtonBlock({
   maxPage,
   sort,
 }: ButtonBlock) {
-  const [inputValue, setInputValue] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<number>(1); // Начальное значение принимается равной 1 - возможное количество страниц не может быть ниже 1, в случае некорректных значений, страница всегда равна 1
 
   useEffect(() => {
     if (inputValue < 1) {
