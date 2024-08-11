@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 
 a,
 a:visited {
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }

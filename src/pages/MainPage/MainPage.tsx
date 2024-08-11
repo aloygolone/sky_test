@@ -22,7 +22,7 @@ export default function MainPage() {
   const [maxPage, setMaxPage] = useState<number>(1);
 
   useEffect(() => {
-    setMaxPage(pagesCalculator(resultCount, perPage));
+    setMaxPage(pagesCalculator(perPage, resultCount));
   }, [perPage, resultCount]);
 
   useEffect(() => {

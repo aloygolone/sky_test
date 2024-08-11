@@ -16,7 +16,7 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
   const [inputValue, setInputValue] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const maxPage = pagesCalculator(userInfo.repositories.total_count, 10);
+  const maxPage = pagesCalculator(10, userInfo.repositories.total_count);
 
   useEffect(() => {
     if (inputValue < 1) {
@@ -104,10 +104,11 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
             isOpenedRepositories &&
             userInfo.repositories.items.map((item) => {
               return (
-                <S.ReposText key={item.id}>
-                  {item.name}
-                  {isOpenedRepositories.toString()}
-                </S.ReposText>
+                <Link to={item.html_url} target="_blank">
+                  <S.ReposText key={item.id}>
+                    {item.name}
+                  </S.ReposText>
+                </Link>
               );
             })
           )}
