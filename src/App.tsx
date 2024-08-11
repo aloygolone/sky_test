@@ -9,5 +9,5 @@ export default function App() {
       <Route path={appRoutes.MAIN} element={<MainPage />} />
       <Route path={appRoutes.NOT_FOUND} element={<NotFoundPage />} />
     </Routes>
-  )
+  );
 }

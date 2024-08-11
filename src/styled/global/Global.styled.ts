@@ -18,6 +18,10 @@ a:visited {
   cursor: pointer;
 }
 
+button {
+  cursor: pointer;
+}
+
 
 ul li {
   list-style: none;
@@ -29,5 +33,7 @@ body {
   height: 100%;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   color: #000000;
+  padding-left: calc((100% - 556px) / 2);
+  padding-right: calc((100% - 556px) / 2);
 }
 `;

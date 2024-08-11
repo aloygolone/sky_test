@@ -1,10 +1,12 @@
 import axios from "axios";
 import { DataType } from "../types";
-import mytoken from "../token.ts"
+
+const token = import.meta.env.VITE_APP_TOKEN;
 
 export async function getUsers(
   searchParams: string,
-  pageNumber: number,
+  perPage: number,
+  pageNumber?: number | null,
   sort?: string
 ) {
   let result: DataType = {
@@ -22,8 +24,6 @@ export async function getUsers(
     sortResult = "&sort=repositories&order=asc";
   }
 
-  const token = mytoken() // В dev версии через Vite не работает process.env - сюда подставляем вместо mytoken - process.env.REACT_APP_TOKEN - токен github
-
   try {
     const config = {
       headers: {
@@ -31,12 +31,13 @@ export async function getUsers(
       },
     };
     const response = await axios.get(
-      `https://api.github.com/search/users?q=${searchParams}+in:login+type:user&page=${pageNumber}${sortResult}&per_page=15&`,
+      `https://api.github.com/search/users?q=${searchParams}+in:login+type:user&page=${pageNumber}${sortResult}&per_page=${perPage}&`,
       config
     );
     result = response.data;
   } catch (error) {
     console.error("Ошибка при получении данных с сервера", error);
+    alert("Возможно превышен лимит запросов, повторите чуть позже");
   }
 
   return result;
