@@ -1,4 +1,4 @@
-export function pagesCalculator(totalCount: number, perPage: number): number {
+export function pagesCalculator(perPage: number, totalCount?: number): number {
   if (totalCount) {
     return Math.ceil(totalCount / perPage);
   }
