@@ -28,7 +28,15 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
     }
 
     setRepoPage(inputValue);
-  }, [inputValue, maxPage, setRepoPage]);
+    if (isOpenedRepositories) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  }, [inputValue, maxPage, setRepoPage, isOpenedRepositories]);
 
   function handleOpenRepositories(
     e: React.MouseEvent<HTMLElement, MouseEvent>
@@ -105,9 +113,7 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
             userInfo.repositories.items.map((item) => {
               return (
                 <Link to={item.html_url} target="_blank">
-                  <S.ReposText key={item.id}>
-                    {item.name}
-                  </S.ReposText>
+                  <S.ReposText key={item.id}>{item.name}</S.ReposText>
                 </Link>
               );
             })

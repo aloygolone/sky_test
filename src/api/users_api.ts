@@ -25,11 +25,17 @@ export async function getUsers(
   }
 
   try {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
+    let config = {};
+    if (token) {
+      config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    } else {
+      config = {};
+    }
+
     const response = await axios.get(
       `https://api.github.com/search/users?q=${searchParams}+in:login+type:user&page=${pageNumber}${sortResult}&per_page=${perPage}&`,
       config
