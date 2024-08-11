@@ -3,16 +3,25 @@ import { InfoDataType } from "../types";
 
 const token = import.meta.env.VITE_APP_TOKEN;
 
-const config = {
-  headers: {
-    Authorization: token ? `Bearer ${token}` : "",
-  },
-};
-
-export async function getUserInfo(username: string, category: string, pageNumber: number) {
+export async function getUserInfo(
+  username: string,
+  category: string,
+  pageNumber: number
+) {
   let result: InfoDataType = { total_count: 0, items: [] };
 
   try {
+    let config = {};
+    if (token) {
+      config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    } else {
+      config = {};
+    }
+
     const response = await axios.get(
       `https://api.github.com/search/${category}?q=${username}&page=${pageNumber}&per_page=10&`,
       config
