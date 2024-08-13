@@ -64,7 +64,11 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
       <S.UserIfoContainer onClick={handleClickOnUserInfo}>
         <S.UserBlock>
           {userInfo.userPhotoUrl ? (
-            <Link to={userInfo.user_url} target="_blank">
+            <Link
+              to={userInfo.user_url}
+              target="_blank"
+              title={`Перейти на аккаунт GitHub - ${userInfo.userName}`}
+            >
               <S.UserPhoto src={userInfo.userPhotoUrl} />
             </Link>
           ) : (
@@ -76,7 +80,11 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
             <S.Text>
               Имя пользователя:{" "}
               <S.InteractiveText>
-                <Link to={userInfo.user_url} target="_blank">
+                <Link
+                  to={userInfo.user_url}
+                  target="_blank"
+                  title={`Перейти на аккаунт GitHub - ${userInfo.userName}`}
+                >
                   {userInfo.userName}
                 </Link>
               </S.InteractiveText>
@@ -112,8 +120,13 @@ export default function UserInfo({ userInfo, setRepoPage }: UserInfo) {
             isOpenedRepositories &&
             userInfo.repositories.items.map((item) => {
               return (
-                <Link to={item.html_url} target="_blank">
-                  <S.ReposText key={item.id}>{item.name}</S.ReposText>
+                <Link
+                  key={item.id}
+                  to={item.html_url}
+                  target="_blank"
+                  title={`Перейти на репозиторий ${item.name}`}
+                >
+                  <S.ReposText>{item.name}</S.ReposText>
                 </Link>
               );
             })

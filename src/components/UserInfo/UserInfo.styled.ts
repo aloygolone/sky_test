@@ -84,17 +84,19 @@ export const InteractiveText = styled.span`
   position: relative;
 `;
 
-export const ReposBlock = styled.div`
+export const ReposBlock = styled.ul`
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
   padding: 10px;
   animation: ${fadeIn} 1s ease-in-out 1s forwards;
 `;
 
-export const ReposText = styled.div`
+export const ReposText = styled.li`
   font-family: "Roboto";
   font-size: 16px;
+  text-align: center;
   border: 1px solid #4b0082;
   border-radius: 10px;
   padding-left: 8px;
