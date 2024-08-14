@@ -1,13 +1,29 @@
 import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
-  from {
+  0% {
+    transform: translateY(-400px);
     opacity: 0;
-    transform: translateY(5px);
   }
-  to {
-    opacity: 1;
+  20% {
+    transform: translateY(-100px);
+    opacity: 0.2;
+  }
+  40% {
+    transform: translateY(30px);
+    opacity: 0.6;
+  }
+  60% {
+    transform: translateY(-20px);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translateY(10px);
+    opacity: 0.6;
+  }
+  100% {
     transform: translateY(0);
+    opacity: 1;
   }
 `;
 
@@ -21,9 +37,10 @@ export const UserBlock = styled.ul`
   flex-direction: column;
   gap: 6px;
   position: relative;
+  margin-bottom: 50px;
 `;
 
-export const UserElement = styled.li`
+export const UserElement = styled.li<{ $index: number }>`
   padding: 4px;
   border: 1px solid black;
   border-radius: 10px;
@@ -31,8 +48,9 @@ export const UserElement = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0;
-  animation: ${fadeIn} 1.5s forwards;
+  &:nth-child(${($props) => $props.$index}) {
+    animation: ${fadeIn} ${($props) => $props.$index * 0.1}s forwards;
+  }
 `;
 
 export const UserText = styled.div`

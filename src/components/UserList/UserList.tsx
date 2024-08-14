@@ -3,7 +3,6 @@ import { UserInfoType, UserType } from "../../types";
 import UserInfo from "../UserInfo/UserInfo.tsx";
 import * as S from "./UserList.styled.ts";
 import { getUserInfo } from "../../api/userInfo_api.ts";
-import Loading from "../Loading/Loading.tsx";
 
 type UserListType = {
   users: UserType[];
@@ -53,6 +52,7 @@ export default function UserList({ users }: UserListType) {
     });
   }
 
+  
   useEffect(() => {
     if (userInfo.userName && isOpenedUserInfo) {
       getUserInfo(userInfo.userName, "repositories", repoPage).then(
@@ -75,10 +75,10 @@ export default function UserList({ users }: UserListType) {
   return (
     <>
       <S.UserBlock>
-        {isLoading && <Loading />}
-        {users.map((user) => (
+        {users.map((user, index) => (
           <S.UserElement
             key={user.id}
+            $index={index + 1}
             onClick={() =>
               handleClickOnUser(
                 user.login,
@@ -88,9 +88,13 @@ export default function UserList({ users }: UserListType) {
               )
             }
           >
-            {isOpenedUserInfo && user.id === userInfo.id && !isLoading ? (
+            {isOpenedUserInfo && user.id === userInfo.id ? (
               <>
-                <UserInfo userInfo={userInfo} setRepoPage={setRepoPage} />
+                <UserInfo
+                  userInfo={userInfo}
+                  setRepoPage={setRepoPage}
+                  isLoadingInfo={isLoading}
+                />
               </>
             ) : (
               <>
