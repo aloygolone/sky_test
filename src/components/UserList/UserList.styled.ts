@@ -4,22 +4,27 @@ const fadeIn = keyframes`
   0% {
     transform: translateY(-400px);
     opacity: 0;
+    box-shadow: 0px -40px 5px #adff2f;
   }
   20% {
     transform: translateY(-100px);
     opacity: 0.2;
+    box-shadow: 0px -40px 5px #adff2f;
   }
   40% {
     transform: translateY(30px);
     opacity: 0.6;
+    box-shadow: 0px -40px 5px #adff2f;
   }
   60% {
     transform: translateY(-20px);
     opacity: 0.8;
+    box-shadow: 0px -40px 5px #adff2f;
   }
   80% {
     transform: translateY(10px);
     opacity: 0.6;
+    box-shadow: 0px -20px 5px #adff2f;
   }
   100% {
     transform: translateY(0);
@@ -49,7 +54,7 @@ export const UserElement = styled.li<{ $index: number }>`
   justify-content: center;
   align-items: center;
   &:nth-child(${($props) => $props.$index}) {
-    animation: ${fadeIn} ${($props) => $props.$index * 0.1}s forwards;
+    animation: ${fadeIn} ${($props) => $props.$index * 0.2}s forwards;
   }
 `;
 
