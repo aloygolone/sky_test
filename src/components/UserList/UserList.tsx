@@ -3,7 +3,6 @@ import { UserInfoType, UserType } from "../../types";
 import UserInfo from "../UserInfo/UserInfo.tsx";
 import * as S from "./UserList.styled.ts";
 import { getUserInfo } from "../../api/userInfo_api.ts";
-import Loading from "../Loading/Loading.tsx";
 
 type UserListType = {
   users: UserType[];
@@ -22,7 +21,7 @@ export default function UserList({ users }: UserListType) {
 
   const [isOpenedUserInfo, setIsOpenedUserInfo] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [repoPage, setRepoPage] = useState<number>(1);
+  const [repoPage, setRepoPage] = useState<number>(1); // Начальное значение страницы отображаемых репозиториев всегда 1
 
   function handleClickOnUser(
     userName: string,
@@ -39,13 +38,13 @@ export default function UserList({ users }: UserListType) {
       user_url: userUrl,
       userPhotoUrl: userPhoto || "",
     }));
-    getUserInfo(userName, "topics", 1).then((topicsData) => {
+    getUserInfo(userName, "topics").then((topicsData) => {
       setUserInfo((prevData) => ({
         ...prevData,
         topicsCount: topicsData.total_count,
       }));
     });
-    getUserInfo(userName, "commits", 1).then((commitsData) => {
+    getUserInfo(userName, "commits").then((commitsData) => {
       setUserInfo((prevData) => ({
         ...prevData,
         commitsCount: commitsData.total_count,
@@ -53,6 +52,7 @@ export default function UserList({ users }: UserListType) {
     });
   }
 
+  
   useEffect(() => {
     if (userInfo.userName && isOpenedUserInfo) {
       getUserInfo(userInfo.userName, "repositories", repoPage).then(
@@ -75,10 +75,10 @@ export default function UserList({ users }: UserListType) {
   return (
     <>
       <S.UserBlock>
-        {isLoading && <Loading />}
-        {users.map((user) => (
+        {users.map((user, index) => (
           <S.UserElement
             key={user.id}
+            $index={index + 1}
             onClick={() =>
               handleClickOnUser(
                 user.login,
@@ -88,9 +88,13 @@ export default function UserList({ users }: UserListType) {
               )
             }
           >
-            {isOpenedUserInfo && user.id === userInfo.id && !isLoading ? (
+            {isOpenedUserInfo && user.id === userInfo.id ? (
               <>
-                <UserInfo userInfo={userInfo} setRepoPage={setRepoPage} />
+                <UserInfo
+                  userInfo={userInfo}
+                  setRepoPage={setRepoPage}
+                  isLoadingInfo={isLoading}
+                />
               </>
             ) : (
               <>

@@ -14,8 +14,8 @@ export default function Search({
   resultCount,
   setPerPage,
 }: SearchType) {
-  const resultPerPage: number[] = [10, 20, 30];
-  const [selectedPerPage, setSelectedPerPage] = useState<number>(10);
+  const resultPerPage: number[] = [10, 20, 30]; // Возможное количество отображения результатов на странице - 10, 20, 30
+  const [selectedPerPage, setSelectedPerPage] = useState<number>(10); // изначальное значение кол-ва результатов на странице принято как 10
 
   return (
     <>
