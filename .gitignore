@@ -14,8 +14,6 @@ dist-ssr
 
 .env
 
-token.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
